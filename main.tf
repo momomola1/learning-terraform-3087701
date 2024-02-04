@@ -14,7 +14,7 @@ data "aws_ami" "app_ami" {
   owners = ["979382823631"] # Bitnami
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "blog" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
 
@@ -25,7 +25,7 @@ resource "aws_instance" "web" {
 }
 
 module "blog_sg" {
-  source = "terraform-aws-modules/security-groups/aws"
+  source = "terraform-aws-modules/security-group/aws"
   version = "4.13.0"
   vpc_id = module.blog_vpc.vpc_id
   name = "blog_vpc"
